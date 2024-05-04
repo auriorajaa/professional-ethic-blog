@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI - Article Blog</title>
+    <link rel="stylesheet" href="/dist/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="icon" href="/src/assets/image/chatbot.png" />
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+
+<body class="font-[mainFont] scroll-smooth">
+    <!-- NAVBAR SECTION STARTED -->
+    <nav
+        class="font-[mainFont] bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="/src/assets/image/chatbot.png" class="h-8" alt="Flowbite Logo">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Group 2</span>
+            </a>
+            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <button id="theme-toggle" type="button"
+                    class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <button data-collapse-toggle="navbar-sticky" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-sticky" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+            </div>
+            <div class=" items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                <ul
+                    class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li>
+                        <a href="/dist/index.html"
+                            class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                            aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="#article"
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Articles</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- NAVBAR SECTION ENDED -->
+
+    <br>
+    <br>
+    <br>
+
+    <!-- ARTICLE SECTION STARTED -->
+    <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
+        <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
+            <article
+                class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                <header class="mb-4 lg:mb-6 not-format">
+                    <address class="flex items-center my-6 not-italic">
+                        <div class="gap-3 inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                            <img class="mr-4 w-16 h-16 rounded-full" src="/src/assets/image/Nathan.png" alt="Alfi">
+                            <div>
+                                <a href="#" rel="author"
+                                    class="text-xl font-bold text-gray-900 dark:text-white">Muhammad Nathan</a>
+                                <p class="text-base text-gray-500 dark:text-gray-400">Game Developer</p>
+                            </div>
+                        </div>
+                    </address>
+                    <h1
+                        class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
+                        Using AI for Real-Time Note-taking</h1>
+                </header>
+                <p class="lead">Studyfetch AI is a powerful AI platform that can help you take notes in real-time more
+                    easily and effectively.</p>
+                <h2 class="dark:text-white">What is Studyfetch AI?
+                </h2>
+                <figure><img src="https://www.studyfetch.com/seo/banner.png" alt="" class="rounded-lg"></figure>
+                <p><strong class="dark:text-white">Studyfetch AI is an AI platform that helps you take real-time notes
+                        during meetings, classes, or
+                        presentations.</strong> The platform utilizes artificial intelligence (AI) to transcribe audio
+                    in real-time
+                    and highlight key points.
+                </p>
+                <h2 class="dark:text-white">What are the Benefits of Using Studyfetch AI?
+                </h2>
+                <p>Studyfetch AI offers several benefits, here's the list:
+                </p>
+                <ul>
+                    <li><strong class="dark:text-white">Improved Focus:</strong> With Studyfetch AI, you can focus on
+                        what the speaker is saying without having to manually take notes.
+                    </li>
+                    <li><strong class="dark:text-white">Capture all information:</strong> Studyfetch AI can transcribe
+                        everything the speaker says, so you won't miss important information.
+                    </li>
+                    <li><strong class="dark:text-white">Facilitates review:</strong> Studyfetch AI allows you to review
+                        your notes easily after meetings or classes.
+                    </li>
+                    <li><strong class="dark:text-white">Creates more structured notes:</strong> Studyfetch AI can
+                        highlight key points in your notes, making them easier to understand and remember.
+                    </li>
+                </ul>
+                <h2 class="dark:text-white">How Does Studyfetch AI Work?
+                </h2>
+
+                <video class="w-full h-80" controls>
+                    <source src="/src/assets/video/studyfetch.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <p><strong class="dark:text-white">Studyfetch AI utilizes</strong> a combination of AI technologies,
+                    including <strong class="dark:text-white">Automatic Speech Recognition
+                        (ASR), Natural Language Processing (NLP), and Machine Learning (ML).</strong> These technologies
+                    enable
+                    Studyfetch AI to transcribe audio in real-time, understand the conversation context, and highlight
+                    key points.
+                </p>
+
+                <h2 class="dark:text-white">When to Use Studyfetch AI?
+                </h2>
+                <p>Studyfetch AI can be used for real-time note-taking in various situations, such as:
+                </p>
+
+                <ul>
+                    <li><strong class="dark:text-white">Meetings:</strong> Studyfetch AI can help you capture key points
+                        in meetings and track actions that need to be taken.
+                    </li>
+                    <li><strong class="dark:text-white">Classes:</strong> Studyfetch AI can assist you in taking notes
+                        on lecture material and identifying important concepts.
+                    </li>
+                    <li><strong class="dark:text-white">Presentations:</strong> Studyfetch AI can help you note down key
+                        points from presentations and questions asked by the audience.
+                    </li>
+                </ul>
+
+                <h2 class="dark:text-white">Who Can Use Studyfetch AI?
+                </h2>
+                <figure><img class="rounded-lg" src="https://images.pexels.com/photos/3184163/pexels-photo-3184163.jpeg"
+                        alt=""></figure>
+                <p>Studyfetch AI can be used by various people, including:
+                </p>
+                <ul>
+                    <li><strong class="dark:text-white">Students:</strong> Studyfetch AI can help students take notes on
+                        lecture material and prepare for exams.
+                    </li>
+                    <li><strong class="dark:text-white">Professionals:</strong> Studyfetch AI can assist professionals
+                        in taking notes during meetings and
+                        tracking actions that need to be taken.
+                    </li>
+                    <li><strong class="dark:text-white">Writers:</strong> Studyfetch AI can help writers take notes on
+                        interviews and transcribe audio.
+                    </li>
+                </ul>
+                <h2 class="dark:text-white">How Much Does Studyfetch AI Cost?
+                </h2>
+                <figure><img class="rounded-lg" src="/src/assets/image/studyfetch.jpeg" alt=""></figure>
+                <p>Studyfetch AI offers various pricing packages, <strong class="dark:text-white">starting from free to
+                        $11.99 per month.</strong> Prices vary depending on
+                    the number of transcription hours you need per month.
+                </p>
+                <h2 class="dark:text-white">Conclusion
+                </h2>
+                <p><strong class="dark:text-white">Studyfetch AI</strong> is a powerful AI platform that <strong
+                        class="dark:text-white">can help you
+                        take notes in real-time more easily and
+                        effectively.</strong> Studyfetch AI can be used by various people and offers various pricing
+                    packages to meet
+                    your needs.
+                </p>
+            </article>
+        </div>
+    </main>
+
+    <aside id="article" aria-label="Related articles" class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
+        <div class="px-4 mx-auto max-w-screen-xl">
+            <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Related articles</h2>
+            <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+                <article class="max-w-xs">
+                    <a href="/dist/pages/article-by-aurio/index.html">
+                        <img src="https://images.pexels.com/photos/16094052/pexels-photo-16094052/free-photo-of-man-using-smartphone-with-chat-gpt.jpeg"
+                            class="mb-5 rounded-lg" alt="Image 1">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="/dist/pages/article-by-aurio/index.html">Best
+                            practice to make AI your communication copilot</a>
+                    </h2>
+                    <p class="mb-4 text-sm text-gray-500 dark:text-gray-400">by Aurio Rajaa</p>
+                    <p class="mb-4 text-gray-500 dark:text-gray-400">AI Communication Copilot is a tool that
+                        utilizes....</p>
+                    <a href="/dist/pages/article-by-aurio/index.html"
+                        class="dark:text-white inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                        Read more
+                    </a>
+                </article>
+                <article class="max-w-xs">
+                    <a href="/dist/pages/article-by-rajif/index.html">
+                        <img src="https://images.pexels.com/photos/8091228/pexels-photo-8091228.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            class="mb-5 rounded-lg" alt="Image 1">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="/dist/pages/article-by-rajif/index.html">Respond
+                            to messages using Flowrite AI</a>
+                    </h2>
+                    <p class="mb-4 text-sm text-gray-500 dark:text-gray-400">by Muhammad Rajif</p>
+                    <p class="mb-4 text-gray-500 dark:text-gray-400">Flowrite AI is a tool for automating
+                        email....</p>
+                    <a href="/dist/pages/article-by-rajif/index.html"
+                        class="dark:text-white inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                        Read more
+                    </a>
+                </article>
+                <article class="max-w-xs">
+                    <a href="/dist/pages/article-by-alfi/index.html">
+                        <img src="https://images.pexels.com/photos/5054213/pexels-photo-5054213.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            class="mb-5 rounded-lg" alt="Image 1">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="/dist/pages/article-by-alfi/index.html">AI for
+                            Email Automation with Levity.AI</a>
+                    </h2>
+                    <p class="mb-4 text-sm text-gray-500 dark:text-gray-400">by Muhammad Alfi</p>
+                    <p class="mb-4 text-gray-500 dark:text-gray-400">Levity.AI is a powerful AI platform that
+                        can....</p>
+                    <a href="/dist/pages/article-by-alfi/index.html"
+                        class="dark:text-white inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                        Read more
+                    </a>
+                </article>
+                <article class="max-w-xs">
+                    <a href="/dist/pages/article-by-rayhan/index.html">
+                        <img src="https://images.pexels.com/photos/6001377/pexels-photo-6001377.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            class="mb-5 rounded-lg" alt="Image 1">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="/dist/pages/article-by-rayhan/index.html">Supporting Academic Writing with AI</a>
+                    </h2>
+                    <p class="mb-4 text-sm text-gray-500 dark:text-gray-400">by Rayhan Alfarizi</p>
+                    <p class="mb-4 text-gray-500 dark:text-gray-400">Jenni AI is a powerful AI platform that can helps....</p>
+                    <a href="/dist/pages/article-by-rayhan/index.html"
+                        class="dark:text-white inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                        Read more
+                    </a>
+                </article>
+            </div>
+        </div>
+    </aside>
+    <!-- ARTICLE SECTION ENDED -->
+
+    <!-- FOOTER SECTION STARTED -->
+    <footer class="p-4 bg-gray-50 md:p-8 lg:p-10 dark:bg-gray-800 font-[mainFont]">
+        <div class="mx-auto max-w-screen-xl text-center">
+            <a href="#"
+                class="gap-3 flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
+                <img src="/src/assets/image/chatbot.png" alt="" class="h-8">
+                Group 2
+            </a>
+            <p class="my-6 text-gray-500 dark:text-gray-400">Created by Aurio, Alfi, Nathan, Rajif and Rayhan in order
+                to fulfilled the professional ethics assignments for CCIT 4SE1 class.</p>
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#"
+                    class="hover:underline">Group 2™</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+    <!-- FOOTER SECTION ENDED -->
+
+    <script src="/dist/app.js"></script>
+    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+
+</html>

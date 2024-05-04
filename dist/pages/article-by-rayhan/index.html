@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI - Article Blog</title>
+    <link rel="stylesheet" href="/dist/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="icon" href="/src/assets/image/chatbot.png" />
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+
+<body class="font-[mainFont] scroll-smooth">
+    <!-- NAVBAR SECTION STARTED -->
+    <nav
+        class="font-[mainFont] bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="/src/assets/image/chatbot.png" class="h-8" alt="Flowbite Logo">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Group 2</span>
+            </a>
+            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <button id="theme-toggle" type="button"
+                    class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <button data-collapse-toggle="navbar-sticky" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-sticky" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+            </div>
+            <div class=" items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                <ul
+                    class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li>
+                        <a href="/dist/index.html"
+                            class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                            aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="#article"
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Articles</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- NAVBAR SECTION ENDED -->
+
+    <br>
+    <br>
+    <br>
+
+    <!-- ARTICLE SECTION STARTED -->
+    <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
+        <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
+            <article
+                class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                <header class="mb-4 lg:mb-6 not-format">
+                    <address class="flex items-center my-6 not-italic">
+                        <div class="gap-3 inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                            <img class="mr-4 w-16 h-16 rounded-full" src="/src/assets/image/Rayhan.png" alt="Rayhan">
+                            <div>
+                                <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">Rayhan
+                                    Alfarizi</a>
+                                <p class="text-base text-gray-500 dark:text-gray-400">Graphic Designer</p>
+                            </div>
+                        </div>
+                    </address>
+                    <h1
+                        class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
+                        Supporting Academic Writing with AI</h1>
+                </header>
+                <p class="lead">Jenni AI is a powerful AI platform that can significantly assist students and
+                    researchers in academic writing.</p>
+                <h2 class="dark:text-white">What is Jenni AI?
+                </h2>
+                <figure><img src="https://framerusercontent.com/images/1xmnmis4IRNRC0ebDhDEAAB36E.png" alt=""
+                        class="rounded-lg"></figure>
+                <p>Jenni AI <strong class="dark:text-white">is an artificial intelligence (AI) platform designed to
+                        assist students and researchers in
+                        academic writing.</strong> It offers a variety of features, including:
+                </p>
+                <ul>
+                    <li><strong class="dark:text-white">Plagiarism checking:</strong> Jenni AI can detect plagiarism in
+                        your text and help you cite sources
+                        properly.</li>
+                    <li>
+                        <strong class="dark:text-white">Grammar and spelling correction:</strong> Jenni AI can help you
+                        identify and correct grammar and spelling
+                        mistakes in your text.
+                    </li>
+                    <li><strong class="dark:text-white">Writing style improvement:</strong> Jenni AI can provide
+                        suggestions for improving your writing style and
+                        making it more academic.</li>
+                    <li><strong class="dark:text-white">Reference formatting:</strong> Jenni AI can help you format
+                        references in various styles, such as APA,
+                        MLA, and Chicago.</li>
+                    <li><strong class="dark:text-white">Source finding:</strong> Jenni AI can help you find relevant
+                        sources for your research.</li>
+                </ul>
+                <h2 class="dark:text-white">What are the Benefits of Using Jenni AI?
+                </h2>
+                <p>Jenni AI offers several benefits, including:
+                </p>
+                <ul>
+                    <li><strong class="dark:text-white">Improved writing quality:</strong> Jenni AI can help you improve
+                        the quality of your academic writing by detecting errors, providing style suggestions, and
+                        assisting with proper source citation.</li>
+                    <li>
+                        <strong class="dark:text-white">Saved time:</strong> Jenni AI can save you time by automating
+                        tasks such as plagiarism checking, grammar correction, and reference formatting.
+                    </li>
+                    <li><strong class="dark:text-white">Increased confidence:</strong> Jenni AI can help you boost your
+                        confidence in your writing abilities.</li>
+                </ul>
+                <h2 class="dark:text-white">How Does Jenni AI Work?
+                </h2>
+                <figure><img class="rounded-lg" src="https://pbs.twimg.com/media/FYCAnyLUsAAc9NJ.jpg:large" alt="">
+                </figure>
+                <p><strong class="dark:text-white">Jenni AI utilizes a combination of</strong> AI technologies,
+                    including <strong class="dark:text-white">natural language processing (NLP),
+                        machine learning (ML), and named entity recognition (NER).</strong> These technologies enable
+                    Jenni AI to
+                    understand the context of your text, identify errors, and provide relevant suggestions.</p>
+                <h2 class="dark:text-white">When to Use Jenni AI
+                </h2>
+                <p>Jenni AI can be used at various stages of the academic writing process, such as:
+                </p>
+                <ul>
+                    <li><strong class="dark:text-white">Brainstorming:</strong> Jenni AI can assist you in brainstorming
+                        ideas for your research topic.</li>
+                    <li>
+                        <strong class="dark:text-white">Drafting:</strong> Jenni AI can help you draft a rough outline
+                        of your paper.
+                    </li>
+                    <li><strong class="dark:text-white">Revising:</strong> Jenni AI can aid in revising your paper and
+                        identifying areas for improvement.</li>
+                    <li><strong class="dark:text-white">Preparing for publication: </strong> Jenni AI can assist in
+                        preparing your paper for publication by ensuring it is free of plagiarism, grammar mistakes, and
+                        style errors.</li>
+                </ul>
+                <h2 class="dark:text-white">Who Can Use Jenni AI?
+                </h2>
+                <p>Jenni AI can be utilized by a wide range of individuals, including:
+                </p>
+                <ul>
+                    <li><strong class="dark:text-white">Students:</strong> Jenni AI can assist students in completing
+                        assignments, preparing for exams, and writing theses.</li>
+                    <li>
+                        <strong class="dark:text-white">Researchers:</strong> Jenni AI can aid researchers in writing
+                        journal articles, books, and grants.
+                    </li>
+                    <li><strong class="dark:text-white">Professional writers:</strong> Jenni AI can help professional
+                        writers enhance the quality of their work and meet deadlines.</li>
+                </ul>
+                <h2 class="dark:text-white">How Much Does Jenni AI Cost?
+                </h2>
+                <figure><img class="rounded-lg" src="/src/assets/image/jenni.png" alt=""></figure>
+                <p>Jenni AI offers various pricing plans, starting from free to $20 per month. The pricing varies
+                    depending on the
+                    features you require and the number of users.
+                </p>
+                <h2 class="dark:text-white">Conclusion
+                </h2>
+                <p><strong class="dark:text-white">Jenni AI is a powerful AI platform that can significantly assist
+                        students and researchers in academic
+                        writing.</strong> It offers a comprehensive suite of features that can help you improve writing
+                    quality, save
+                    time, and enhance your confidence.</p>
+            </article>
+        </div>
+    </main>
+
+    <aside id="article" aria-label="Related articles" class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
+        <div class="px-4 mx-auto max-w-screen-xl">
+            <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Related articles</h2>
+            <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+                <article class="max-w-xs">
+                    <a href="/dist/pages/article-by-aurio/index.html">
+                        <img src="https://images.pexels.com/photos/16094052/pexels-photo-16094052/free-photo-of-man-using-smartphone-with-chat-gpt.jpeg"
+                            class="mb-5 rounded-lg" alt="Image 1">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="/dist/pages/article-by-aurio/index.html">Best
+                            practice to make AI your communication copilot</a>
+                    </h2>
+                    <p class="mb-4 text-sm text-gray-500 dark:text-gray-400">by Aurio Rajaa</p>
+                    <p class="mb-4 text-gray-500 dark:text-gray-400">AI Communication Copilot is a tool that
+                        utilizes....</p>
+                    <a href="/dist/pages/article-by-aurio/index.html"
+                        class="dark:text-white inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                        Read more
+                    </a>
+                </article>
+                <article class="max-w-xs">
+                    <a href="/dist/pages/article-by-rajif/index.html">
+                        <img src="https://images.pexels.com/photos/8091228/pexels-photo-8091228.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            class="mb-5 rounded-lg" alt="Image 1">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="/dist/pages/article-by-rajif/index.html">Respond
+                            to messages using Flowrite AI</a>
+                    </h2>
+                    <p class="mb-4 text-sm text-gray-500 dark:text-gray-400">by Muhammad Rajif</p>
+                    <p class="mb-4 text-gray-500 dark:text-gray-400">Flowrite AI is a tool for automating
+                        email....</p>
+                    <a href="/dist/pages/article-by-rajif/index.html"
+                        class="dark:text-white inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                        Read more
+                    </a>
+                </article>
+                <article class="max-w-xs">
+                    <a href="/dist/pages/article-by-alfi/index.html">
+                        <img src="https://images.pexels.com/photos/5054213/pexels-photo-5054213.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            class="mb-5 rounded-lg" alt="Image 1">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="/dist/pages/article-by-alfi/index.html">AI for
+                            Email Automation with Levity.AI</a>
+                    </h2>
+                    <p class="mb-4 text-sm text-gray-500 dark:text-gray-400">by Muhammad Alfi</p>
+                    <p class="mb-4 text-gray-500 dark:text-gray-400">Levity.AI is a powerful AI platform that
+                        can....</p>
+                    <a href="/dist/pages/article-by-alfi/index.html"
+                        class="dark:text-white inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                        Read more
+                    </a>
+                </article>
+                <article class="max-w-xs">
+                    <a href="/dist/pages/article-by-nathan/index.html">
+                        <img src="https://images.pexels.com/photos/3862153/pexels-photo-3862153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            class="mb-5 rounded-lg" alt="Image 1">
+                    </a>
+                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                        <a href="/dist/pages/article-by-nathan/index.html">Using AI for Real-Time Note-taking</a>
+                    </h2>
+                    <p class="mb-4 text-sm text-gray-500 dark:text-gray-400">by Muhammad Nathan</p>
+                    <p class="mb-4 text-gray-500 dark:text-gray-400">Studyfetch AI is an AI platform that
+                        helps....</p>
+                    <a href="/dist/pages/article-by-nathan/index.html"
+                        class="dark:text-white inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                        Read more
+                    </a>
+                </article>
+            </div>
+        </div>
+    </aside>
+    <!-- ARTICLE SECTION ENDED -->
+
+    <!-- FOOTER SECTION STARTED -->
+    <footer class="p-4 bg-gray-50 md:p-8 lg:p-10 dark:bg-gray-800 font-[mainFont]">
+        <div class="mx-auto max-w-screen-xl text-center">
+            <a href="#"
+                class="gap-3 flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
+                <img src="/src/assets/image/chatbot.png" alt="" class="h-8">
+                Group 2
+            </a>
+            <p class="my-6 text-gray-500 dark:text-gray-400">Created by Aurio, Alfi, Nathan, Rajif and Rayhan in order
+                to fulfilled the professional ethics assignments for CCIT 4SE1 class.</p>
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#"
+                    class="hover:underline">Group 2™</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+    <!-- FOOTER SECTION ENDED -->
+
+    <script src="/dist/app.js"></script>
+    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+
+</html>
