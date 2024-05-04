@@ -2226,10 +2226,6 @@ input:checked + .toggle-bg {
   text-align: center;
 }
 
-.text-justify {
-  text-align: justify;
-}
-
 .font-\[mainFont\] {
   font-family: mainFont;
 }
@@ -2395,7 +2391,7 @@ input:checked + .toggle-bg {
 @font-face {
   font-family: mainFont;
 
-  src: url(/src/assets/fonts/Poppins/Poppins-Regular.ttf);
+  src: url(assets/fonts/Poppins/Poppins-Regular.ttf);
 }
 
 .hover\:border-gray-300:hover {
