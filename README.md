@@ -30,10 +30,10 @@ This website is designed to provide information and education about various AI-p
 - **Tailwind**: A CSS framework to facilitate responsive design.
 
 ## Installation and Usage
-**Clone the Repository**:
-    ```bash
-    git clone https://github.com/auriorajaa/professional-ethic-blog.git
-    ```
+Clone the Repository:
+```bash
+ git clone https://github.com/auriorajaa/professional-ethic-blog.git
+```
     
 ## Contact
 
